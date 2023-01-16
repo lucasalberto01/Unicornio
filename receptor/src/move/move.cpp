@@ -46,6 +46,10 @@ float Kd = 0;
 PID pidA(&rpmA, &driverOutA, &setPointA, Kp, Ki, Kd, DIRECT);
 PID pidB(&rpmB, &driverOutB, &setPointB, Kp, Ki, Kd, DIRECT);
 
+/*
+* Interrupt functions
+*/
+
 void Move_interruptA() {
     pulsesA++;
 }
@@ -54,6 +58,9 @@ void Move_interruptB() {
     pulsesB++;
 }
 
+/*
+* Setup functions
+*/
 void Move_setup() {
     pidA.SetMode(AUTOMATIC);
     pidA.SetSampleTime(100);
