@@ -35,13 +35,10 @@ void Radio_setup() {
 }
 
 void Radio_proccess() {
-    uint8_t pipe;
 
-    if (radio.available(&pipe)) {
+    if (radio.available()) {
         radio.read(&comm, sizeof(comm));
         bool resp = radio.writeAckPayload(1, &ackData, sizeof(ackData));
         resp ? Serial.println("ACK sent") : Serial.println("ACK not sent");
-        ackData.odom1++;
-        ackData.odom2++;
     }
 }
