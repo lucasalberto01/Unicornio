@@ -103,7 +103,7 @@ void Move_process_PID() {
     motors.setSpeedB(driverOutB);
 }
 
-void Move_process() {
+void Move_process_PID_test() {
     if (comm.velA > 0) {  // forward
         setPointA = comm.velA;
         motors.forwardA();
@@ -131,4 +131,28 @@ void Move_process() {
     // Serial.print(setPointA);
     // Serial.print(" velB: ");
     // Serial.println(setPointB);
+}
+
+void Move_process() {
+    if (comm.velA > 0) {  // forward
+        motors.forwardA();
+        motors.setSpeedA(comm.velA);
+
+    } else if (comm.velA < 0) {  // backward
+        motors.backwardA();
+        motors.setSpeedA(-comm.velA);
+    } else {  // stop
+        motors.stopA();
+    }
+
+    if (comm.velB > 0) {  // forward
+        motors.forwardB();
+        motors.setSpeedB(comm.velB);
+
+    } else if (comm.velB < 0) {  // backward
+        motors.backwardB();
+        motors.setSpeedB(-comm.velB);
+    } else {  // stop
+        motors.stopB();
+    }
 }
